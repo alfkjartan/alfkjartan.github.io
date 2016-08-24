@@ -1,0 +1,25 @@
+\documentclass[tikz]{standalone}
+%\usetikzlibrary{calc}
+\begin{document}
+
+\begin{tikzpicture}[scale=1.3, block/.style={rectangle, draw, minimum height=15mm, minimum width = 15mm}, sumnode/.style={circle, draw, inner sep=2pt}, node distance=22mm]
+  \node[block,] (car) {car};
+  \node[sumnode, left of=car,] (sumforce) {$\sum$};
+  \node[coordinate, above of=sumforce] (disturbance) {};
+  \node[block, left of=sumforce, node distance=26mm] (pid) {PID};
+  \node[sumnode, left of=pid,] (sum) {$\sum$};
+  \node[coordinate, left of=sum,] (input) {};
+  \node[coordinate, right of=car] (measure) {};
+  \node[coordinate, right of=measure] (output) {};
+
+
+  \draw[->] (input) -- node[above, near start] {$r$} (sum);
+  \draw[->] (sum) -- node[above] {$e$} (pid);
+  \draw[->] (pid) -- node[above] {$\theta$} (sumforce);
+  \draw[->] (sumforce) --  node[above]{} (car);
+  \draw[->] (car) --  node[above]{$y = \dot{x}$} (output);
+  \draw[->] (measure) -- ++(0,-2cm) -| (sum) node[left, pos=0.9] {$-$};
+  \draw[->] (disturbance) --  node[right, near start]{$d$} (sumforce);
+
+\end{tikzpicture}
+\end{document}
