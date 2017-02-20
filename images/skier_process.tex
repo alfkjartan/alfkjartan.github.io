@@ -1,0 +1,30 @@
+\documentclass[tikz]{standalone}
+%\usetikzlibrary{calc}
+\usetikzlibrary{shapes}
+
+\begin{document}
+
+\tikzstyle{decision} = [diamond, draw, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+
+
+\begin{tikzpicture} [node distance=3cm, terminal/.style={ellipse, draw, text badly centered}, block/.style={rectangle, draw, text badly centered}]
+{\small
+  %% Skier
+  %\node (title) {Customer generator process};
+  \node [terminal, ] (start) {Start};
+  \node [decision, right of=start] (continue) {Time to go home?};
+  \node [block, right of=continue, text width=9em, node distance=4cm] (enterQ) {Enter the queue.\\ Passivate};
+  \node [block, right of=enterQ, text width=9em, node distance=4cm] (goingup) {Go up\\ Hold 200 s};
+  \node [block, right of=goingup, text width=9em,node distance=4cm] (goingdown) {Ski down\\ Hold $T_d$};
+  \node [terminal, below of=continue] (stop) {Stop}; 
+  % Draw edges
+  \draw [->] (start) -- node[midway,inner sep=0pt] (loop) {} (continue);
+  \draw [->] (continue) -- node[above] {No} (enterQ);
+  \draw [->] (continue) -- node[left] {Yes} (stop);
+  \draw [->] (enterQ) -- (goingup);
+  \draw [->] (goingup) -- (goingdown);
+  \draw [->] (goingdown.east) -- ++(6mm, 0) -- ++(0cm, 1.2cm) -| (loop);
+}
+\end{tikzpicture}
+\end{document}
