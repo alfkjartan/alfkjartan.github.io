@@ -13,7 +13,7 @@
   %% Customer Generator
   %\node (title) {Customer generator process};
   \node [terminal, ] (start) {Start};
-  \node [block, right of=start, text width=9em, node distance=4cm] (pickup) {Pick up from $queue$ $\max (2,\, \mathrm{len}(queue))$ skiers};
+  \node [block, right of=start, text width=9em, node distance=4cm] (pickup) {Pick up from $queue$ $\min (2,\, \mathrm{len}(queue))$ skiers};
   \node [block, right of=pickup, text width=9em, node distance=4cm] (wait) {Hold 4 seconds};
   % Draw edges
   \draw [->] (start) -- node[midway,inner sep=0pt] (loop) {} (pickup);
