@@ -13,7 +13,7 @@
   %% Customer Generator
   %\node (title) {Customer generator process};
   \node [terminal, ] (start) {Start};
-  \node [block, right of=start, text width=9em, node distance=4cm] (wait) {Hold $T$\\ $T_r \sim \mathrm{Exp}\left(\lambda\right)$};
+  \node [block, right of=start, text width=9em, node distance=4cm] (wait) {Hold $T$\\ $T \sim \mathrm{Exp}\left(\lambda\right)$};
   \node [block, right of=wait, text width=9em, node distance=4cm] (create) {Create new customer};
   % Draw edges
   \draw [->] (start) -- node[midway,inner sep=0pt] (loop) {} (wait);
