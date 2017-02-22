@@ -1,0 +1,34 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{shapes,snakes}
+\begin{document}
+
+\begin{tikzpicture} [node distance=2cm, terminal/.style={ellipse, draw}, block/.style={rectangle, draw, align=center}]
+{\small
+  %% Fodelseprocess
+  \node (title) {Varggenerator};
+  \node [terminal, below of=title, node distance=1cm] (start) {Start};
+  \node [block, below of=start, text width=9em] (wait) {V\"anta $T_a$\\ $T_a \sim \mathrm{Exp}\left(\lambda_0 N\right)$};
+  \node [block, below of=wait, text width=9em, node distance=2.5cm] (create) {Skapa och aktivera varg};
+  % Draw edges
+  \draw [->] (start) -- node[midway, coordinate] (loop) {} (wait);
+  \draw [->] (wait) -- (create);
+  \draw [->] (create) -- ++(0cm, -1.5cm) -- ++(3cm, 0cm) |- (loop);
+
+  
+  %% Vargprocess
+  \node [right of=title, node distance=9cm] (title2) {Vargprocess};
+  \node [terminal, below of=title2, node distance=1cm] (start2) {Start};
+  \node [block, below of=start2, text width=7em] (add) {L\"agg till varg\\ $N \leftarrow N+1$};
+  \node [block, below of=add, text width=7em] (live) {V\"anta $T_l$\\$T_l \sim  \mathrm{Norm}(4,1)$};
+  \node [block, below of=live, text width=7em] (remove) {Ta bort varg\\ $N \leftarrow N-1$};
+  \node [terminal, below of=remove] (stop1) {Stop};
+
+  \draw [->] (start2) -- (add);
+  \draw [->] (add) -- (live);
+  \draw [->] (live) -- (remove);
+  \draw [->] (remove) -- (stop1);
+  }
+
+
+\end{tikzpicture}
+\end{document}
