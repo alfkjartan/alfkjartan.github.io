@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,tikz}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+
+\begin{document}
+
+
+\def\omegazero{1.0}
+\begin{tikzpicture}
+\begin{axis}[
+  width=14cm,
+  height=3cm,
+  xlabel={$k$},
+  ylabel={$y(k)$},
+  xmin=-2.5,
+  xmax=10.5,
+]
+
+    \addplot 
+    shell[thick,black, ycomb, prefix=pgfshell_, id=bodenm,] {julia -q --eval  "H=tf([2],[0.5, -1], 1); print_impulse(H, 10);"};
+
+\end{axis}
+\end{tikzpicture}
+\end{document}
