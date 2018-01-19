@@ -1,0 +1,28 @@
+\documentclass[tikz]{standalone}
+%\usetikzlibrary{calc}
+\begin{document}
+
+\begin{tikzpicture}[scale=1.3, block/.style={rectangle, draw, minimum height=15mm, minimum width = 15mm}, sumnode/.style={circle, draw, inner sep=2pt}, node distance=22mm]
+  
+  \node[sumnode] (sum) {$\sum$};
+  \node[block, left of=sum] (F) {$F(s)$};
+  \node[block, above of=sum] (H) {$H(s)$};
+  \node[block, right of=sum] (G) {$G(s)$};
+
+  \node[coordinate, left of=F,] (input) {};
+  \node[coordinate, above of=H] (disturbance) {};
+  \node[coordinate, right of=G] (output) {};
+
+
+  \draw[->] (input) -- node[above, near start] {$e$} (F);
+  \draw[->] (F) -- node[above, ] {} (sum);
+  \draw[->] (sum) -- node[above, ] {} (G);
+
+  \draw[->] (disturbance) -- node[left, near start] {$v$} (H);
+  \draw[->] (H) -- node[left, near start] {} (sum);
+
+  \draw[->] (G) -- node[above, near end] {$y$} (output);
+
+
+\end{tikzpicture}
+\end{document}
