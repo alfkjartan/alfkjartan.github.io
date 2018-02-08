@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,tikz}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usepackage{romannum}
+
+\usepgfplotslibrary{groupplots}
+
+\begin{document}
+
+
+
+\begin{tikzpicture}
+\pgfmathsetmacro{\ww}{1}
+\pgfmathsetmacro{\zz}{0.7}
+\pgfmathsetmacro{\realpart}{-\zz*\ww}
+\pgfmathsetmacro{\impart}{sqrt(1-pow(\zz, 2))*\ww}
+
+\begin{axis}[
+  clip=false,
+  width=7cm,
+  height=8.5cm,
+  axis lines=middle, 
+  xmin=-1.5, xmax=0.4,
+  ymin=-1.2, ymax=1.2,
+  xlabel={Re},
+  ylabel={Im},
+  xtick={\realpart},
+  ytick = {-\impart, \impart},
+  yticklabels = {,},
+  yticklabel pos = right,
+  title={s-plane}
+]
+\node[black!50!green!100] at (axis cs: \realpart, \impart) {\huge $\times$};
+\node[black!50!green!100] at (axis cs: \realpart, -\impart) {\huge $\times$};
+
+\node[] at (axis cs: 0.5, -\impart) {$-i\impart$};
+\node[] at (axis cs: 0.5, \impart) {$i\impart$};
+
+\end{axis}
+
+\end{tikzpicture}
+\end{document}
