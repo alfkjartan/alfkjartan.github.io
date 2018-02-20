@@ -1,0 +1,7 @@
+<launch>
+  <!-- Use the logic in empty_world.launch. Just launch another world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find pioneer_gazebo)/worlds/pioneer.world"/>
+    <!-- More params can be changed here -->
+  </include>
+</launch>
