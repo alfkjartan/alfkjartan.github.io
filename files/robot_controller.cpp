@@ -90,6 +90,7 @@ void move_to_goal(geometry_msgs::Pose goal_pose,
     std::cout << "Current angle =" << currentOrientation << std::endl;
     std::cout << "Desired angle =" << desiredOrientation << std::endl;
     std::cout << "Angle error =" << aerr << std::endl;
+    std::cout << "Dist to goal =" << dist << std::endl;
 
 
 
