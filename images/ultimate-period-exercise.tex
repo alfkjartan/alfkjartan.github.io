@@ -1,0 +1,24 @@
+\documentclass{standalone}
+
+\usepackage{tikz,pgf,pgfplots}
+
+\def\ww{3}
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+  width = 12cm,
+  height = 5cm,
+  xlabel = {$t$ [s]},
+  ylabel = {$y(t)$},
+  grid = both,
+  minor tick num=9,
+  minor grid style={gray!25},
+  major grid style={black!50},
+]
+
+\addplot+[black, no marks, domain=4:14, samples=400] {1 + sin(deg(\ww*x))};
+\end{axis}
+\end{tikzpicture}
+\end{document}
