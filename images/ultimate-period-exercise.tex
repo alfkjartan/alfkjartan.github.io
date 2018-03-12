@@ -2,9 +2,11 @@
 
 \usepackage{tikz,pgf,pgfplots}
 
-\def\ww{3}
 
 \begin{document}
+
+\pgfmathsetmacro{\TT}{2.4}
+\pgfmathsetmacro{\ww}{2*pi/\TT}
 
 \begin{tikzpicture}
 \begin{axis}[
