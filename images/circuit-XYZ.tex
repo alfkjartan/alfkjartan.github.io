@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\usepackage[siunitx]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}
+  \draw (0,0) to[short, ] (0.5,0) to[short,] (0.5,1)
+  to[short, -*] node[above, pos=1.5]{$X_{ab}$} 
+  node[below, pos=1] {\small $a$} 
+  node[below, pos=2] {\small $b$} (1.5,1);
+  \draw (2,1) to[short, *-] (3,1) to[short, ] (3,0) to[short, ] (3.5,0);
+
+  \draw (0,0) to[short, ] (0.5,0) to[short,] (0.5,-1)
+  to[short, -*] node[above, pos=1.5]{$Y_{cd}$} 
+  node[below, pos=1] {\small $c$} 
+  node[below, pos=2] {\small $d$} (1.5,-1);
+  \draw (2,-1) to[short, *-] (3,-1) to[short, ] (3,0) to[short, ] (3.5,0);
+
+\end{circuitikz}
+\end{document}
+ 
