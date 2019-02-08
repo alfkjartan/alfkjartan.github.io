@@ -1,0 +1,13 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[american,siunitx]{circuitikz}
+\usetikzlibrary{arrows,shapes,calc,positioning}
+
+\begin{document}
+\begin{circuitikz}
+  \draw (0,0) to[R=$R_2$, o-o] (2,0); 
+  \draw (0.3, 0) to[, *-,] (0.3, -1) to [C, l_=$C_2$] (1.7,-1) -- (1.7, 0);  \end{circuitikz}
+\end{document}

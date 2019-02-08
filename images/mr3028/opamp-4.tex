@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[american,siunitx]{circuitikz}
+\usetikzlibrary{arrows,shapes,calc,positioning}
+
+\newcommand*{\pRC}[2]{%
+  \begin{scope}[xshift=#1, yshift=#2] 
+    \draw (0,0) -- (0.3, 0) -- (0.3, 0.5) to[R, ] (1.7, 0.5) -- (1.7, 0) -- (2,0); 
+    \draw (0.3, 0) to[, *-,] (0.3, -0.5) to [C, ] (1.7,-0.5) -- (1.7, 0); 
+  \end{scope}
+}
+    
+\begin{document}
+\begin{circuitikz}
+  \node[op amp] (op) {};
+  \draw (op.out) to[short, -o,] ++(1,0);
+  \draw (op.out)  |- (1,2.5) to[C] (-1, 2.5);
+  \draw (op.-)  |- (-1,2.5);
+  \pRC{-4cm}{0.5cm}
+  \draw (-4, 0.5) to [short,-o,] (-4.5,0.5);
+  \draw (op.-) to (-2, 0.5);
+  \draw (op.+) to ++ (0,-1) node[ground] {};
+\end{circuitikz}
+\end{document}
