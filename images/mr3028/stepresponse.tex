@@ -1,0 +1,56 @@
+\documentclass{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,tikz}
+%\usepackage{setspace}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\def\yoffs{0}
+\def\dy{1.2}
+\pgfmathsetmacro{\yfinal}{\yoffs{} + \dy}
+\def\uoffs{0}
+\def\du{0.8}
+\pgfmathsetmacro{\ufinal}{\uoffs{} + \du}
+
+\def\LL{0.24}
+\def\DT{0.75}
+\pgfmathsetmacro{\RT}{\LL + \DT}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  height=5.6cm,width=9.5cm,
+  /tikz/font=\small,
+  xlabel={$t$ [s]},
+  ylabel={\textcolor{black!60!green!90}{$y(t)$}, \textcolor{black!60!blue!90}{$u(t)$}},
+  xmax=5.0,
+  xmin=-1.3,
+  ymin=-0.3,
+  ymax=1.6,
+  grid = both,
+  ytick = {0,1},
+  minor tick num=9,
+  minor grid style={gray!25},
+  major grid style={black!50},
+  clip=true,
+  ]
+  \addplot+[black!60!green!90, thick, no marks, 
+  y filter/.code={\pgfmathparse{\yoffs + \pgfmathresult*\dy + 0.02*rand}\pgfmathresult}, domain=-1.2:0, samples=60] {0}; 
+  \addplot+[black!60!green!90, thick, no marks, 
+  y filter/.code={\pgfmathparse{\yoffs + \pgfmathresult*\dy + 0.02*rand}\pgfmathresult},] 
+  table[x index=0, y index=1, col sep=tab]  {./pid-steps.dat};
+  \addplot+[black!60!blue!90, thick, no marks, ] coordinates{ (-1.2, \uoffs) (0,\uoffs) (0, \ufinal) (5, \ufinal)};
+  %\draw[<->, thin, black!60!blue!90] (axis cs: 4, \uoffs) -- node[right] {$\Delta u$} (axis cs:4, \ufinal);
+  %\draw[<->, thin, black!60!green!90] (axis cs: 3.5,\yoffs) -- node[right] {$\Delta y$} (axis cs:3.5, \yfinal);
+  %\draw[ black!60!red!90] (axis cs: \LL , \yoffs) -- node[left, pos=0.65] {$R$} (axis cs: \RT, \yfinal);
+  %\draw[thin, black!60!red!90] (axis cs: -1.2 ,\yoffs) -- node[left, pos=0.8] {} (axis cs:3.5, \yoffs);
+  %\draw[thin, black!60!red!90] (axis cs: 0.2 ,0.0) -- node[left, pos=0.8] {} (axis cs:0.2, \yoffs);
+  %\draw[<->,thin, black!60!red!90] (axis cs: 0 ,0) -- node[below, pos=0.5] {$L$} (axis cs:\LL, 0.0);
+  %\draw[thin, black!60!red!90] (axis cs: 0 ,\yfinal) -- node[below, pos=0.5] {} (axis cs:5, \yfinal);
+  %\draw[thin, black!60!red!90] (axis cs: \RT ,\yfinal) -- node[below, pos=0.5] {} (axis cs:\RT, 0);
+  %\draw[<->,thin, black!60!red!90] (axis cs: \LL ,0) -- node[below, pos=0.5] {$\Delta t$} (axis cs:\RT, 0.0);
+\end{axis}
+\end{tikzpicture}
+\end{document}
