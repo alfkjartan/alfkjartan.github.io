@@ -1,0 +1,46 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+
+\pgfplotsset{compat=1.13}
+
+\usepackage{xcolor}
+
+\begin{document}
+
+  \begin{tikzpicture}
+
+    \foreach \ts/\po/\x/\lbl in {1.5/15/0/A, 2/5/6cm/B, 1.5/0.1/12cm/C, 1.5/5/18cm/D} {%
+      \pgfmathsetmacro\realpart{-3/\ts}
+      \pgfmathsetmacro\lnPOsq{pow(ln(\po/100), 2)}
+      \pgfmathsetmacro\zz{sqrt(\lnPOsq/(pow(3.1415,2) + \lnPOsq))}
+      \pgfmathsetmacro\wn{-\realpart/\zz}
+      \pgfmathsetmacro\impart{\wn*sqrt(1-\zz*\zz)}
+
+      \begin{axis} [
+        xshift=\x,
+        clip=false,
+      width=5cm,
+      height=8cm,
+      axis x line=center,
+      axis y line=center,
+      ytick=\empty, xtick=\empty,
+      yticklabel pos=right,
+      ymin=-4, ymax=4,
+      xmin=-3, xmax=1,
+      ylabel=Im,
+      xlabel=Re,
+      xtick={\realpart}, ytick={\impart},
+       yticklabel = {$i\pgfmathroundtozerofill{\impart}\pgfmathresult$},
+   ]
+    %\nextgroupplot[xtick={\realpart}, ytick={\impart},yticklabel={$i\impart$},]
+  %\edef\temp{\noexpand\node at (axis cs: \realpart ,\impart) {\Large $\times$};}
+  %\temp
+   \node at (axis cs: \realpart, \impart) {\Large $\times$};
+   \node at (axis cs: \realpart, -\impart) {\Large $\times$};
+   \node at (axis cs: 0, -5) {\Large \bf \lbl};
+ \end{axis}
+}
+\end{tikzpicture}
+\end{document}
